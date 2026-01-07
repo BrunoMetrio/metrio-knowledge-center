@@ -1,0 +1,28 @@
+# MkDocs
+site/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Backups
+*.backup
+Dockerfile.backup
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

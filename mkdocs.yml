@@ -1,0 +1,62 @@
+site_name: Zendesk Knowledge Base
+site_url: http://localhost:8000
+repo_url: ''
+nav:
+  - Getting Started:
+      - Introduction to Metrio: 'Getting Started/34416209192475-Introduction-to-Metrio.md'
+      - User Management: 'Getting Started/36977854040219-User-Management.md'
+  - Carbon Accounting & Management:
+      - Introduction to CAM Tool: 'Carbon Accounting & Management/31940281264795-Introduction-to-CAM-Tool.md'
+      - Estimations: 'Carbon Accounting & Management/31940425922459-Estimations.md'
+      - Scope 1: 'Carbon Accounting & Management/31940571128731-Scope-1.md'
+      - Scope 3: 'Carbon Accounting & Management/31940728751771-Scope-3.md'
+  - Collect Data:
+      - Introduction to Data Sources and List Manager: 'Collect Data/37826075519003-Introduction-to-Data-Sources-and-List-Manager.md'
+      - Create or Duplicate a Data Source: 'Collect Data/29497967193627-Create-or-Duplicate-a-Data-Source.md'
+      - Complete Tasks: 'Collect Data/34416048301211-Complete-Tasks.md'
+  - Measure Your Impact:
+      - Navigating the List of Metrics: 'Measure Your Impact/29498074625435-Navigating-the-List-of-Metrics.md'
+      - Simple Metrics: 'Measure Your Impact/29498125748507-Simple-Metrics.md'
+  - Report & Communicate:
+      - Introduction to Publisher: 'Report & Communicate/34947326402075-Introduction-to-Publisher.md'
+      - Create a Report in Publisher: 'Report & Communicate/29100299556635-Create-a-Report-in-Publisher.md'
+  - Disclose Your Results:
+      - FAQs: 'Disclose Your Results/29161248731419-FAQs.md'
+      - Quick Start Guide for Administrators: 'Disclose Your Results/29099128214811-Quick-Start-Guide-for-Administrators.md'
+      - Scope 2: 'Carbon Accounting & Management/31940630489755-Scope-2.md'
+
+  - Release Notes:
+      - 2025 Roadmap: 'Release Notes/33699448650523-2025-Roadmap.md'
+      - 23-11-24 4-7 Release Notes: 'Release Notes/31272098764315--23-11-24-4-7-Release-Notes.md'
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: '#1a1a2e' # Dark blue from screenshot
+      accent: '#00aaff' # Bright blue accent
+    - scheme: slate
+      primary: '#1a1a2e'
+      accent: '#00aaff'
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  font:
+    text: Inter
+    code: Fira Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/just-the-docs/just-the-docs
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - toc:
+      permalink: true

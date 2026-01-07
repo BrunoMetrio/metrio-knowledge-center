@@ -1,0 +1,388 @@
+/* Custom CSS inspired by ClickUp Help Center design */
+
+/* --- CSS Variables for Easy Theming --- */
+:root {
+    --clickup-green: #7B68EE; /* A vibrant purple, mimicking ClickUp's accent */
+    --clickup-green-dark: #6658cc; /* Darker shade for hover states */
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --background-light-gray: #F9FAFB; /* Very light gray for body/sections */
+    --background-white: #ffffff;
+    --border-light: #e0e0e0;
+    --shadow-subtle: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --border-radius: 8px;
+
+    /* Adapted from Lotus One Zendesk theme */
+    --color-bg: #f9f9f9; /* Background color */
+    --color-bg-secondary: #ffffff; /* Secondary background */
+    --color-bg-tertiary: #ddd; /* Tertiary background */
+    --color-heading-primary: #333333; /* Primary heading color */
+    --color-text-primary: #666666; /* Primary text color */
+    --color-text-secondary: #999999; /* Secondary text color */
+    --color-link: #007bff; /* Link color */
+    --color-link-hover: #0056b3; /* Link hover color */
+    --color-border: #e0e0e0; /* Border color */
+    --font-family-body: 'Inter', sans-serif; /* Body font */
+    --font-family-heading: 'Fira Mono', monospace; /* Heading font */
+    --font-size-base: 16px; /* Base font size */
+    --line-height-body: 1.6; /* Body line height */
+    --line-height-heading: 1.4; /* Heading line height */
+}
+
+/* --- Base Styles --- */
+body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light-gray);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-heading-primary);
+    font-family: var(--font-family-heading);
+    line-height: var(--line-height-heading);
+}
+
+/* Universal box-sizing for consistent layout */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+a {
+    color: var(--clickup-green);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--clickup-green-dark);
+    text-decoration: underline;
+}
+
+/* --- Header --- */
+.md-header { /* Assuming this class is for your top header */
+    background-color: var(--background-white);
+    box-shadow: 0 1px 3px var(--shadow-subtle);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 70px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.md-header__title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+}
+
+.md-header__title img { /* For a logo */
+    height: 35px;
+    margin-right: var(--spacing-sm);
+}
+
+.md-header__nav { /* Right side of header for user/menu icons */
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+/* --- Main Content Layout --- */
+.md-container {
+    max-width: 1200px; /* Max width for content area */
+    margin: var(--spacing-lg) auto; /* Center content and add vertical space */
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    gap: var(--spacing-lg); /* Space between major sections */
+}
+
+/* --- Prominent Search Section --- */
+.search-section {
+    background-color: var(--background-white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    padding: var(--spacing-lg) 0; /* Vertical padding */
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.search-section h1 {
+    font-size: 2.8em;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+    font-weight: 800; /* Very bold for prominence */
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 60%; /* Adjust width of search bar */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input-wrapper input[type="text"] {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    padding-left: 45px; /* Space for search icon */
+    border: 1px solid var(--border-light);
+    border-radius: 25px; /* Pill shape */
+    font-size: 1.1em;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input-wrapper input[type="text"]:focus {
+    border-color: var(--clickup-green);
+    box-shadow: 0 0 0 3px rgba(123, 104, 238, 0.2); /* Soft focus ring */
+}
+
+.search-input-wrapper .search-icon {
+    position: absolute;
+    left: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 1.2em; /* Adjust if using an icon font */
+}
+
+
+/* --- Category Section (Grid of Cards) --- */
+.category-section {
+    padding: var(--spacing-lg) 0; /* Adjust padding as needed */
+}
+
+.category-section h2 {
+    font-size: 2em;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: var(--spacing-md); /* Space between cards */
+}
+
+.category-card {
+    background-color: var(--background-white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--shadow-subtle);
+    padding: var(--spacing-lg);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    min-height: 180px; /* Ensure cards have some height */
+    border: 1px solid transparent; /* For hover border */
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px var(--shadow-medium);
+    border-color: var(--clickup-green); /* Subtle border on hover */
+}
+
+.category-card .icon {
+    font-size: 3.5em; /* Large icons */
+    color: var(--clickup-green);
+    margin-bottom: var(--spacing-sm);
+}
+
+.category-card h3 {
+    font-size: 1.4em;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+}
+
+.category-card p {
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1; /* Allows text to take up space */
+}
+
+.category-card .read-more {
+    color: var(--clickup-green);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.category-card .read-more:hover {
+    color: var(--clickup-green-dark);
+    text-decoration: underline;
+}
+
+
+/* --- Featured Articles / Popular Articles Section --- */
+.articles-section {
+    background-color: var(--background-white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--shadow-subtle);
+    padding: var(--spacing-lg);
+}
+
+.articles-section h2 {
+    font-size: 1.8em;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    text-align: center;
+}
+
+.article-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.article-list li {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.article-list li:last-child {
+    border-bottom: none;
+}
+
+.article-list li a {
+    display: block;
+    font-size: 1.1em;
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: var(--spacing-sm);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.article-list li a:hover {
+    background-color: var(--background-light-gray);
+    text-decoration: none; /* Remove underline on hover for list items */
+}
+
+.article-list li a::before { /* Small bullet or arrow icon */
+    content: "•"; /* Or a custom arrow icon */
+    color: var(--clickup-green);
+    margin-right: var(--spacing-sm);
+    font-weight: bold;
+}
+
+/* --- General Content Elements (re-styling from previous example if needed) --- */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+button {
+    background-color: var(--clickup-green);
+    color: var(--background-white);
+    border: none;
+    border-radius: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--clickup-green-dark);
+}
+
+/* --- Footer (conceptual) --- */
+.md-footer {
+    background-color: var(--text-primary); /* Dark background for footer */
+    color: var(--background-white);
+    padding: var(--spacing-lg) var(--spacing-lg);
+    text-align: center;
+    margin-top: var(--spacing-lg);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .search-input-wrapper {
+        width: 80%;
+    }
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .md-header {
+        padding: var(--spacing-sm) var(--spacing-md);
+        min-height: 60px;
+    }
+    .md-header__title {
+        font-size: 1.5em;
+    }
+    .md-container {
+        padding: 0 var(--spacing-md);
+        margin: var(--spacing-md) auto;
+        gap: var(--spacing-md);
+    }
+    .search-section {
+        padding: var(--spacing-md) 0;
+    }
+    .search-section h1 {
+        font-size: 2.2em;
+    }
+    .search-input-wrapper {
+        width: 90%;
+    }
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--spacing-sm);
+    }
+    .category-card {
+        padding: var(--spacing-md);
+        min-height: 160px;
+    }
+    .category-card .icon {
+        font-size: 2.8em;
+    }
+    .category-card h3 {
+        font-size: 1.2em;
+    }
+    .articles-section {
+        padding: var(--spacing-md);
+    }
+}
+
+@media (max-width: 576px) {
+    .md-header__title {
+        font-size: 1.2em;
+    }
+    .search-section h1 {
+        font-size: 1.8em;
+    }
+    .search-input-wrapper input[type="text"] {
+        font-size: 1em;
+        padding-left: 40px;
+    }
+    .category-grid {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+    .category-card {
+        padding: var(--spacing-md);
+    }
+}

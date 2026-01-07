@@ -1,0 +1,9 @@
+# Ne pas inclure ces fichiers dans l'image Docker
+site/
+.git
+.gitignore
+__pycache__
+*.pyc
+.DS_Store
+*.md
+!docs/**/*.md

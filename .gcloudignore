@@ -1,0 +1,7 @@
+# Fichiers à ignorer lors du déploiement
+.git
+.gitignore
+__pycache__/
+*.pyc
+.DS_Store
+site/
