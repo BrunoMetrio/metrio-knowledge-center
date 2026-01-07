@@ -50,3 +50,4 @@ Une fois déployé, votre site sera disponible à :
 - [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) - Thème moderne
 - [GitHub Pages](https://pages.github.com/) - Hébergement gratuit
 - [GitHub Actions](https://github.com/features/actions) - Déploiement automatique
+
