@@ -42,9 +42,167 @@ html {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-/* Code block improvements */
+/* ========================================
+   Enhanced Code Block Styling
+   ======================================== */
+
+/* Code block container */
 .highlight {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: 1.5em 0;
+  position: relative;
+}
+
+/* Code block with title */
+.highlight pre {
+  margin: 0;
+  padding: 1.2em 1em;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%);
+  overflow-x: auto;
+}
+
+/* Line numbers styling */
+.highlight .linenodiv {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.2em 0.5em;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.highlight .linenodiv pre {
+  background: transparent !important;
+  padding: 0 0.5em;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: right;
+}
+
+/* Inline code */
+code {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  padding: 0.2em 0.5em;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-family: 'Fira Code', 'Fira Mono', monospace;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  font-weight: 500;
+}
+
+/* Code inside pre tags (actual code blocks) */
+pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-size: 0.875em;
+  line-height: 1.6;
+  display: block;
+  color: #e8eaed;
+}
+
+/* Copy button styling */
+.md-clipboard {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: rgba(102, 126, 234, 0.9);
   border-radius: 8px;
+  padding: 0.5em 0.8em;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.md-clipboard:hover {
+  background: rgba(102, 126, 234, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Copy button icon */
+.md-clipboard svg {
+  fill: white;
+}
+
+/* Code block language badge */
+.highlight::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0.5em;
+  left: 1em;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.3em 0.8em;
+  border-radius: 6px;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 1;
+}
+
+/* Syntax highlighting improvements */
+.highlight .hll { background-color: rgba(255, 255, 255, 0.1); }
+.highlight .c { color: #6c757d; font-style: italic; } /* Comment */
+.highlight .k { color: #ff79c6; font-weight: bold; } /* Keyword */
+.highlight .o { color: #ff79c6; } /* Operator */
+.highlight .n { color: #f8f8f2; } /* Name */
+.highlight .s { color: #50fa7b; } /* String */
+.highlight .nb { color: #8be9fd; } /* Built-in */
+.highlight .nc { color: #8be9fd; } /* Class */
+.highlight .nf { color: #50fa7b; } /* Function */
+.highlight .mi { color: #bd93f9; } /* Number */
+.highlight .se { color: #ff79c6; } /* String escape */
+
+/* Scrollbar for code blocks */
+.highlight pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.highlight pre::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.highlight pre::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4px;
+}
+
+.highlight pre::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #7689f0 0%, #8557b0 100%);
+}
+
+/* Code tabs styling */
+.tabbed-set {
+  margin: 1.5em 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.tabbed-labels {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0.5em;
+}
+
+.tabbed-labels label {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.tabbed-labels label:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.tabbed-labels label.tabbed-label--active {
+  background: white;
+  color: #667eea;
 }
 
 /* Navigation improvements */
@@ -61,5 +219,13 @@ html {
 @media (max-width: 768px) {
   .grid.cards {
     grid-template-columns: 1fr;
+  }
+  
+  .highlight {
+    border-radius: 8px;
+  }
+  
+  .highlight pre {
+    font-size: 0.8em;
   }
 }
