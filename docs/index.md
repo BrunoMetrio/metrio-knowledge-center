@@ -73,15 +73,8 @@ hide:
     [:octicons-arrow-right-24: Data Sources Guide](Collect Data/37826075519003-Introduction-to-Data-Sources-and-List-Manager.md)
 
     [:octicons-arrow-right-24: Complete Tasks](Collect Data/34416048301211-Complete-Tasks.md)
-
--   :chart_with_upwards_trend: __Measure Impact__
-
-    ---
-
-    Define and track your sustainability metrics
-
-    [:octicons-arrow-right-24: Navigating Metrics](Measure Your Impact/29498074625435-Navigating-the-List-of-Metrics.md)
-
+    
+    [:octicons-arrow-right-24: REST API Export](Collect Data/32985480949531-Exporting-Data-Using-Nasdaq-Metrio-REST-API.md)
     [:octicons-arrow-right-24: Simple Metrics](Measure Your Impact/29498125748507-Simple-Metrics.md)
 
 -   :material-file-document: __Report & Communicate__

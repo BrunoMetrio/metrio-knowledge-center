@@ -1,0 +1,984 @@
+
+    <html><head><style>
+    body {
+        font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+        background: #f8fafc;
+        color: #23272f;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 820px;
+        margin: 2.5em auto 2em auto;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 16px 0 rgba(60,72,88,0.07);
+        padding: 2.5em 2em 2em 2em;
+        line-height: 1.7;
+    }
+    h1, h2, h3, h4 {
+        color: #1a237e;
+        font-weight: 700;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        letter-spacing: -0.5px;
+    }
+    h1 { font-size: 2.3em; }
+    h2 { font-size: 1.6em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.05em; }
+    p, ul, ol, table, pre, blockquote {
+        margin-bottom: 1.1em;
+    }
+    a {
+        color: #1976d2;
+        text-decoration: underline;
+        border-bottom: none;
+        transition: color 0.2s;
+    }
+    a:hover {
+        color: #0d47a1;
+        text-decoration: underline wavy #1976d2;
+    }
+    pre, code {
+        background: #f3f6fa;
+        border-radius: 6px;
+        padding: 2px 8px;
+        font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+        font-size: 1em;
+    }
+    pre {
+        padding: 1em;
+        overflow-x: auto;
+        background: #f8fafd;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background: #fafdff;
+        margin-bottom: 1.5em;
+    }
+    th, td {
+        border: 1px solid #e3e6f3;
+        padding: 10px 12px;
+        text-align: left;
+    }
+    th {
+        background: #f3f6fa;
+        font-weight: 600;
+    }
+    blockquote {
+        border-left: 4px solid #1976d2;
+        background: #f6faff;
+        margin: 1.5em 0;
+        padding: 1em 1.5em;
+        color: #444;
+        font-style: italic;
+    }
+    img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin: 1em 0;
+        box-shadow: 0 1px 6px 0 rgba(60,72,88,0.07);
+        background: #f3f6fa;
+    }
+    hr {
+        border: none;
+        border-top: 1px solid #e3e6f3;
+        margin: 2em 0;
+    }
+    ul, ol {
+        padding-left: 2em;
+    }
+    ::selection {
+        background: #e3e6f3;
+    }
+    @media (max-width: 900px) {
+        .container { padding: 1em; }
+    }
+    </style><meta charset='utf-8'></head><body><div class='container'><article class="lt-article lt-mb-5" data-article="" itemscope="" itemtype="http://schema.org/Article">
+<header>
+<h1 class="lt-article__title lt-mb-4" itemprop="name">
+              
+              Exporting Data Using Nasdaq Metrio™ REST API
+            </h1>
+<div class="lt-d-sm-flex lt-justify-content-between lt-mb-4 lt-align-items-start">
+<div class="lt-mb-2 lt-me-sm-4">
+<div class="lt-entry-info">
+<div class="lt-entry-info__content">
+<div class="lt-meta">
+                          
+                            Updated <time data-datetime="relative" datetime="2025-11-26T14:31:07Z" title="2025-11-26T14:31:07Z">November 26, 2025 14:31</time>
+</div>
+</div>
+</div>
+</div>
+<div class="lt-article-subscribe lt-d-flex lt-d-print-none lt-align-items-center">
+<button class="lt-btn lt-btn--icon" onclick="javascript:print();">
+<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<div class="lt-article__body rte rte-enhanced" itemprop="articleBody">
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">The Nasdaq Metrio Public API allows you to programmatically export a JSON or CSV file from an existing metric within your Nasdaq Metrio account. This document provides comprehensive information on authentication, endpoints, request formats, and examples to help you integrate your systems seamlessly</span><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">.</span><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"></span></p><p> </p><div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow"><div class="ql-editor">
+<div class="cu-editor-wrapper doc-editor">
+<h1 id="h_01JNEFQPPYSKR3KFJA2AJEJWW5">1. Authentication</h1>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow"><div class="ql-editor">
+<p>Before using the Nasdaq Metrio API, you need to generate an API key within your Nasdaq Metrio account.</p>
+<p> </p>
+<h3 id="h_01JNEFYGDNB5AH95Y1HKYD3CBF">Prerequisites</h3>
+<p>Ensure that the Nasdaq Metrio REST API feature is activated in your account.</p>
+<p> </p>
+<h3 id="h_01JNEFYVNFTCYAVM4ZA2M6A1WV">Key Generation</h3>
+<ol>
+<li data-list-item-id="e4b848aa02dd0c47047b8a82e6c0bc878">Click on your profile icon in the top-right corner of the page.</li>
+<li data-list-item-id="ed6d5185bec62716eb12398f9db35b40a">Select API Keys.</li>
+<li data-list-item-id="ef11e18372eba39ed82ed08fb5029761d">Click Generate new key.</li>
+<li data-list-item-id="ecceff079b148ba36575c0a1ee6d56c99">Give your key a descriptive name (e.g., "Project X Integration").</li>
+<li data-list-item-id="e2b9971ef1e2e1c7c6bc120016971fb4a">Click Generate key.</li>
+</ol>
+</div></div></div></div>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow">
+<p> </p>
+<p><strong>Important: Copy the generated API key immediately. You will not be able to retrieve it again.</strong></p>
+<p> </p>
+<p> </p>
+<h3 class="ql-editor" id="h_01JNEGQC0ZZWYWPKT89CSDDRXD">Key Management</h3>
+</div></div></div>
+<div class="cu-editor-wrapper doc-editor">
+<p class="cu-editor ql-container ql-snow" id="h_01JNEHC0P4MSWA80TYKSYSNG7S">You can create multiple API keys to organize your projects and track usage.<br/>Currently, API keys do not have expiration dates. Please manage your keys securely and regenerate them if you suspect any compromise.</p>
+<p> </p>
+<p> </p>
+<h3 id="h_01JNEG75V7A9CXSG61Y9GVQDVD">Security Best Practices</h3>
+<ul>
+<li data-list-item-id="e1fe6c2e13f7357ac765db089a582ceb0">Treat your API key like a password. Keep it confidential.</li>
+<li data-list-item-id="e5f65069473d45e45a510681c4a3e5c70">Do not embed API keys directly in client-side code (e.g., JavaScript).</li>
+<li data-list-item-id="e08b4d9f3d544aab05ad51c4e837061d8">If you suspect your API key has been compromised, immediately regenerate it.</li>
+</ul>
+<h1 class="cu-editor-content" id="h_01JNEHDTV57WCE37XP761P15TW"> </h1>
+</div>
+<figure class="wysiwyg-table wysiwyg-table-align-left"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 70%;"/>
+</colgroup>
+<tbody><tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 201px;"> </td>
+<td data-row="row-2hl4qp" style="height: 22px; width: 282px;"> </td>
+</tr></tbody>
+</table></figure><h1 class="cu-editor-content" id="01JR910K4KQ68M8S6KFQ4T20M2">2. JSON export</h1>
+</div>
+<div class="cu-editor-content"> </div>
+<div class="cu-editor-content">This section describes how to export your metric's data in a JSON format using the API.</div>
+<div class="cu-editor-content"></div>
+<div class="cu-editor-content">
+<p> </p>
+<h3 id="h_01JNEGK4D1FQBVCHS2N9JCGWME">Header</h3>
+<p> </p>
+<p>API endpoints expect arguments as JSON-encoded objects in the POST request body. Set the Content-Type header to application/json.</p>
+<p> </p>
+<figure class="wysiwyg-table wysiwyg-table-align-left" style="height: 66px;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 70%;"/>
+</colgroup>
+<tbody>
+<tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 201px;"><p class="ql-align-center" data-block-id="block-534604f1-6285-4480-9eb0-f27c4b62deaa"><strong>HTTP Header</strong></p></td>
+<td data-row="row-2hl4qp" style="height: 22px; width: 282px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><strong>Content</strong></p></td>
+</tr>
+<tr data-row="row-wg30gx" style="height: 22px;">
+<td data-row="row-wg30gx" style="height: 22px; width: 201px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">Content-Type</p></td>
+<td data-row="row-wg30gx" style="height: 22px; width: 282px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">application/json</p></td>
+</tr>
+<tr data-row="row-m1u2zy" style="height: 22px;">
+<td data-row="row-m1u2zy" style="height: 22px; width: 201px;"><p class="ql-align-center" data-block-id="block-c3e83dca-fc82-48e8-93c4-7ca04594b107">X-Metrio-API-Key</p></td>
+<td data-row="row-m1u2zy" style="height: 22px; width: 282px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1"><span data-block-id="block-c47b10b0-e302-4f18-b952-4d2e36214afc">&lt;<strong>your_api_key</strong>&gt;</span></p></td>
+</tr>
+<tr>
+<td style="width: 201px;"><p class="ql-align-center" data-block-id="block-c3e83dca-fc82-48e8-93c4-7ca04594b107">X-Page</p></td>
+<td style="width: 282px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1"><span data-block-id="block-c47b10b0-e302-4f18-b952-4d2e36214afc">The number of pages. Default to 2.</span></p></td>
+</tr>
+<tr>
+<td style="width: 201px;"><p class="ql-align-center" data-block-id="block-c3e83dca-fc82-48e8-93c4-7ca04594b107">X-Per-Page</p></td>
+<td style="width: 282px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1"><span data-block-id="block-c47b10b0-e302-4f18-b952-4d2e36214afc">The number of elements per page. Default to 3. Note the maximum per_page parameter is 10000.</span></p></td>
+</tr>
+</tbody>
+</table></figure><p> </p>
+<h3 id="h_01JNEX535XSVE8GHYVTVX1G442">Endpoint</h3>
+<pre class="wysiwyg-code-block"><code class="language-auto">POST https://&lt;customer&gt;.metrio.net/api/metrics/data-access/public/v1/query</code></pre>
+<p> </p>
+<ul><li data-list-item-id="ee5192563013d9611618541098edc47c9">Replace &lt;<strong>customer</strong>&gt; with the URL prefix of your account (e.g., "demo123" if your account URL is <a href="https://demo123.metrio.net)">https://demo123.metrio.net)</a>.</li></ul>
+<p> </p>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><h3 id="h_01JNEXGEN241BV63TAQN5HS714">Payload details</h3></div></div>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow"><div class="ql-editor">
+<pre class="wysiwyg-code-block" data-block-id="block-bb4e4e41-becc-45e5-a2b8-83656a5db51d" data-language="json"><code class="language-auto">{
+"metric_key": "metric_id",
+"filters": [{"column_key": "column_key_to_filter", "values": ["value_key_to_filter"]}],
+"sorting": [{"column_key":"column_key_to_sort", "order": "desc"}],
+"locale": "local"
+}</code></pre>
+<div class="ql-advanced-banner ql-advanced-banner-has-icon" data-advanced-banner-color="red" data-advanced-banner-icon="{"><p data-block-id="block-d3db3933-96bf-4db4-9071-bf7ef6af2d95"> </p></div>
+</div></div></div></div>
+<p data-block-id="block-d3db3933-96bf-4db4-9071-bf7ef6af2d95"> </p>
+<figure class="wysiwyg-table wysiwyg-table-align-left" style="height: 174px; width: 858px;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 27.27%;"/>
+<col style="width: 63.64%;"/>
+<col style="width: 4.55%;"/>
+<col style="width: 4.54%;"/>
+</colgroup>
+<tbody>
+<tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-534604f1-6285-4480-9eb0-f27c4b62deaa"><strong>Parameter</strong></p></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Description</strong></span></p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Mandatory</strong></span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Type</strong></span></p></td>
+</tr>
+<tr data-row="row-wg30gx" style="height: 22px;">
+<td data-row="row-wg30gx" style="height: 22px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">metric_key</p></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">This is the id of the metric for which we want to create a query.</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">filters</p></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">An array of filter objects. Each filter object specifies a column to filter on and the values to match. By default is an empty list [].</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">No</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">array</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><ul><li class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444" data-list-item-id="e00c671c6a2b796c8a5819362bc33d0f0">column_key</li></ul></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The key of the column to filter.</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+<tr style="height: 10px;">
+<td style="height: 10px; width: 134.266px;"><ul><li class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444" data-list-item-id="e24b0b8571b2fe8b71899e1b8ff62e739">values</li></ul></td>
+<td style="height: 10px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">An array of values to filter for. The column will be filtered to only include rows where the column_key matches one of the values in this array. </p></td>
+<td style="height: 10px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 10px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">array</span></p></td>
+</tr>
+<tr style="height: 10px;">
+<td style="height: 10px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">sorting</p></td>
+<td style="height: 10px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">An array of sorting objects. Each sorting object specifies a column to sort by and the sort order. Note that it allows for multi-sorting. By default is an empty list [].</p></td>
+<td style="height: 10px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">No</span></p></td>
+<td style="height: 10px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">array</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><ul><li class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444" data-list-item-id="eb8f26e552f1e2e0be5e0992896289814">column_key</li></ul></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The key of the column to sort by.</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><ul><li class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444" data-list-item-id="e021ee98ca96731d8c10b8653ddec3ceb">order</li></ul></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The sort order. Valid values are "asc" (ascending) and "desc" (descending).</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">locale</p></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The locale to use for formatting the data. Defaults to "en" if not specified. Could be "fr", "es", etc depending locales available in your account.</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">No</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+</tbody>
+</table></figure><p data-block-id="block-d3db3933-96bf-4db4-9071-bf7ef6af2d95"> </p>
+</div>
+<div class="ql-advanced-banner ql-advanced-banner-has-icon" data-advanced-banner-color="red" data-advanced-banner-icon="{">
+<h3 id="h_01JNEZB0WPK80XHPGC30AN54YK">Response Codes</h3>
+<p> </p>
+</div>
+<div class="clickup-table-view"><figure class="wysiwyg-table wysiwyg-table-align-left" style="height: 132px; width: 821px;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 28.57%;"/>
+<col style="width: 66.67%;"/>
+<col style="width: 4.76%;"/>
+</colgroup>
+<tbody>
+<tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-534604f1-6285-4480-9eb0-f27c4b62deaa"><strong>Code</strong></p></td>
+<td data-row="row-2hl4qp" style="height: 22px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Description</strong></span></p></td>
+<td style="height: 22px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong> </strong></span></p></td>
+</tr>
+<tr data-row="row-wg30gx" style="height: 44px;">
+<td data-row="row-wg30gx" style="height: 44px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444"><strong>200</strong></p></td>
+<td data-row="row-wg30gx" style="height: 44px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span style="color: #009900;"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11"><strong>Successful Response</strong></span></span></p></td>
+<td style="height: 44px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The request was successfully submitted.</p></td>
+</tr>
+<tr data-row="row-m1u2zy" style="height: 44px;">
+<td data-row="row-m1u2zy" style="height: 44px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-c3e83dca-fc82-48e8-93c4-7ca04594b107"><strong>422</strong></p></td>
+<td data-row="row-m1u2zy" style="height: 44px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1"><span style="color: #FF9900;"><span data-block-id="block-c47b10b0-e302-4f18-b952-4d2e36214afc"><strong>Validation Error</strong></span></span></p></td>
+<td style="height: 44px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1">The request contained invalid data.</p></td>
+</tr>
+<tr data-row="row-yun4a4" style="height: 22px;">
+<td data-row="row-yun4a4" style="height: 22px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-d65922a6-ec1c-45e6-88cf-b444d2a739f2"><strong>500</strong></p></td>
+<td data-row="row-yun4a4" style="height: 22px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-tfrxgi" data-colspan="1" data-row="row-yun4a4" data-rowspan="1"><span style="color: #FF0000;"><span data-block-id="block-2837a131-c436-4881-b78d-1ef458d147d0"><strong>Internal Server Error</strong></span></span></p></td>
+<td style="height: 22px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-tfrxgi" data-colspan="1" data-row="row-yun4a4" data-rowspan="1"><span data-block-id="block-2837a131-c436-4881-b78d-1ef458d147d0">An unexpected error occurred on the server.</span></p></td>
+</tr>
+</tbody>
+</table></figure></div>
+<h2 data-block-id="block-ede86f36-14aa-4fe3-b6e1-5461e14851cb" id="h_01HS1YD3TRXB5VVJHJXGH7N7ST"> </h2>
+<p> </p>
+<h3 data-block-id="block-ede86f36-14aa-4fe3-b6e1-5461e14851cb" id="h_01HS1V33EC06SN1TAQCQY6VK4C">Request Limits</h3>
+<p> </p>
+<div class="ql-block" data-block-id="block-472633fc-b455-4ed8-82a3-e52f9f4d8258">You are limited to <strong>100 submissions every 10 seconds</strong>. Exceeding this limit may result in temporary throttling.</div>
+<p> </p>
+<h3 data-block-id="block-b586c438-d142-479a-9a48-87517447c275" id="h_01HS1V33ECXFJ03EYSG8AE25NW">Parameters Definition</h3>
+<p> </p>
+<p>To use the API to export Metrics' data, a metric needs to be created. Once created, to use the API export functionality, the following parameter needs to be defined:</p>
+<ul class="ql-rendered-list-container" data-is-root="true">
+<li class="ql-rendered-bullet-list" data-block-id="block-56a88e0f-da87-45ff-84bb-7f9cfca724a3" data-list-item-id="ebcd082dfc96408458d8100891d60c464">&lt;<strong>customer</strong>&gt; : The URL prefix of your account (e.g., "demo123" if your account URL is https://demo123.metrio.net).</li>
+<li class="ql-rendered-bullet-list" data-block-id="block-15f36d5f-f781-4412-9aa5-1b91ce876f11" data-list-item-id="e472e24f7d56e2be4bf7316709280303e">&lt;<strong>metric_key</strong>&gt;: The Metric ID of the target Metric. You can find this value in the "General Information Section" the Metric within Nasdaq Metrio. It's labeled "Metric ID".</li>
+</ul>
+</div></div></div></div><div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow">
+<div class="ql-editor"> </div>
+<div class="ql-editor">
+<p>You can copy the key by hovering the <code><strong>Metric ID</strong></code> field.<br/> </p>
+<h2 data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" id="h_01HS1V33ECBD3D2MS352DHA60Y"> </h2>
+<h3 id="h_01JNF0CQGQ1BNNYFX2EVRKKYWM">Example</h3>
+<ul><li data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" data-list-item-id="e96b0f42c575de3606287867e75a7b93b" id="h_01JHTK5YRFT452SY50YGD694DP">Swagger</li></ul>
+<p>You can access and test the API using our Swagger UI:</p>
+<pre class="wysiwyg-code-block"><code class="language-auto">https://&lt;customer&gt;.metrio.net/api/metrics/data-access/public/docs#/</code></pre>
+<ul><li data-list-item-id="e8b0eae40836781c8806812f4598346dc" style="list-style-type: none;"> <ul>
+<li data-list-item-id="e2e51c8fd116d298e10934c330aa6734a">Replace &lt;<strong>customer</strong>&gt; with your account's URL prefix.</li>
+<li data-list-item-id="ef687f8deb38b969f40a38f888837721c">
+<strong>You must be logged in</strong> to your Nasdaq Metrio account to access the Swagger UI.</li>
+</ul>
+</li></ul>
+<p> </p>
+<p><img alt="Screenshot 2025-04-08 at 1.55.07 PM.png" src="32985480949531-Exporting-Data-Using-Nasdaq-Metrio-REST-API_images/35788322757019"/></p>
+<p> </p>
+<ul><li data-list-item-id="e4fc868e0e033662b252f6f0a45ab9467">Curl</li></ul>
+<pre class="wysiwyg-code-block"><code class="language-auto">INPUT:
+
+curl -X 'POST' \                                                     
+  'https://{client}.metrio.net/api/metrics/data-access/public/v1/query' \
+  -H 'X-Page: 1' \
+  -H 'X-Per-Page: 10' \
+  -H 'X-Metrio-API-Key: APIKeyValue' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "metric_key": "packages_ghgtool_metric_consumption_global_monthly",
+  "filters": [{"column_key": "tag_facility_id", "values": ["facility_0007"]}],
+  "sorting": [{"column_key":"date", "order": "desc"}],
+  "locale": "en"
+}'
+</code></pre>
+<div class="ql-block" data-block-id="block-882796e0-f4f7-49ef-8ce9-f131a629dba1"> </div>
+<pre class="wysiwyg-code-block"><code class="language-auto">OUTPUT:
+
+{
+  "metadata": {
+    "per_page": 10,
+    "page": 1,
+    "total_count": 6362,
+    "total_page": 637
+  },
+  "headers": [
+    {"id": "date", "type": "date", "name": "Date"},
+    {"id": "tag_facility_id", "type": "string", "name": "Facility ID"},
+    {"id": "meta_country", "type": "string", "name": "Country"},
+    {"id": "tag_unit", "type": "string", "name": "Unit"},
+    {"id": "value", "type": "number", "name": "Main Value: Consumption (in unit)"}
+  ],
+  "data": [
+    [
+      {"id": "date", "value": "2024-12-01 00:00:00.000000000", "localized_value": "2024-12"},
+      {"id": "tag_facility_id", "value": "facility_0007", "localized_value": "New York City"},
+      {"id": "meta_country", "value": "USA", "localized_value": "United States"},
+      {"id": "tag_unit", "value": "kwh", "localized_value": "kWh"},
+      {"id": "value", "value": 222.73404164950054, "localized_value": "222.73404164950054"}
+    ],
+    [
+      {"id": "date", "value": "2024-11-01 00:00:00.000000000", "localized_value": "2024-12"},
+      {"id": "tag_facility_id", "value": "facility_0007", "localized_value": "Los Angeles"},
+      {"id": "meta_country", "value": "USA", "localized_value": "United States"},
+      {"id": "tag_unit", "value": "kwh", "localized_value": "kWh"},
+      {"id": "value", "value": 123.456789, "localized_value": "123.456789"}
+    ]
+  ]
+}
+</code></pre>
+<div class="ql-block" data-block-id="block-22e43ff8-2066-4bcd-8096-cc9d106dc35f"> </div>
+<h3 class="ql-heading" data-block-id="block-b5581f4e-e538-40c5-bcdd-3ff5a72743c9" id="h_01JJ2RD7P22MZ8FKC1XW3EW6XW"> </h3>
+<div class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc"> </div>
+<ul><li data-list-item-id="e5c79b4512a63bf4d11affd20929feaf1">Python</li></ul>
+<pre class="wysiwyg-code-block"><code class="language-auto">import json
+import os
+import requests
+import pandas as pd
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+customer = "_YOUR_CLIENT_URL_PREFIX_"         # client URL prefix, ex: demo
+KeyValue = "_YOUR_API_KEY_"                   # Paste a valid Metrio API key
+metric_id = "_METRIC_ID_"                   # Metric ID of the metrics
+per_page = "10000"
+
+
+# Optional parameters
+filters = []
+# filters = [{"column_key": "tag_facility_id", "values": ["facility_0007"]}]
+sorting = []
+# sorting = [{"column_key": "date", "order": "desc"}]
+locale = "en"
+
+
+
+
+headers = {
+    'X-Metrio-API-Key': KeyValue,
+    'X-Per-Page': per_page,
+    "Content-Type": "application/json"
+}
+
+def fetch_page_data(session, page):
+    try:
+        response = session.post(
+            f'https://{customer}.metrio.net/api/metrics/data-access/public/v1/query',
+            headers={
+                'accept': 'application/json',
+                'X-Page': str(page),
+                'X-Per-Page': per_page,
+                'X-Metrio-API-Key': KeyValue,
+                'Content-Type': 'application/json'
+            },
+            data=json.dumps({
+                "metric_key": metric_id,
+                "filters": filters,
+                "sorting": sorting,
+                "locale": locale
+            })
+        )
+        response.raise_for_status()
+        return response.json().get('data', [])
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error fetching data for page {page}: {e}")
+        return []
+
+def fetch_initial_data(session):
+    try:
+        response = session.post(
+            f'https://{customer}.metrio.net/api/metrics/data-access/public/query',
+            headers=headers,
+            data=json.dumps({
+                "metric_key": metric_id,
+                "filters": filters,
+                "sorting": sorting,
+                "locale": locale
+            })
+        )
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error fetching initial data: {e}")
+        return None
+
+def save_to_json(data, filename='output.json'):
+    with open(filename, 'w') as f:
+        json.dump(data, f)
+    logging.info(f"Data saved to {filename}")
+
+def save_to_csv(data, filename='output.csv'):
+    rows = []
+    for item in data:
+        row = {entry['id']: entry['value'] for entry in item}
+        rows.append(row)
+    df = pd.DataFrame(rows)
+    df.to_csv(filename, index=False)
+    logging.info(f"Data saved to {filename}")
+
+def fetch_data():
+    data = []
+
+    with requests.Session() as session:
+        initial_data = fetch_initial_data(session)
+        if not initial_data:
+            return
+
+        try:
+            total_page = initial_data['metadata']['total_page']
+            total_count = initial_data['metadata']['total_count']
+            logging.info(f"Total pages: {total_page}")
+            logging.info(f"Total rows: {total_count}")
+        except KeyError as e:
+            logging.error(f"Error: {e} not found in response metadata")
+            return
+
+        total_fetched = 0
+
+        for page in range(1, total_page + 1):
+            page_data = fetch_page_data(session, page)
+            data.extend(page_data)
+            total_fetched += len(page_data)
+            percentage = (total_fetched / total_count) * 100
+            logging.info(f"Fetched page {page}: {len(page_data)} records ({percentage:.2f}% of total)")
+
+    save_to_json(data)
+    save_to_csv(data)
+
+if __name__ == "__main__":
+    fetch_data()
+</code></pre>
+<div class="ql-block" data-block-id="block-af14afa9-7ab1-4f90-9f01-b68a51121a32"> </div>
+<div class="ql-block" data-block-id="block-f0438895-87d4-4496-8763-f375205c788d">
+<div class="cu-editor-wrapper doc-editor"><h1 class="cu-editor-content" id="01JR94E4B5G82E5ZHZGEC5DH1C"> </h1></div>
+<figure class="wysiwyg-table wysiwyg-table-align-left"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 70%;"/>
+</colgroup>
+<tbody><tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 201px;"> </td>
+<td data-row="row-2hl4qp" style="height: 22px; width: 282px;"> </td>
+</tr></tbody>
+</table></figure><h1 class="cu-editor-content" id="01JR94E4B6DAP9RNZZXCZH8X50">3. CSV export<span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"> </span>
+</h1>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow"><div class="ql-editor">
+<p class="cu-editor-content"> </p>
+<p class="cu-editor-content">This section describes how to export data tables from Metrio metrics in CSV format. It uses a two-step process: first, you request a data export, and then you retrieve the generated CSV file.</p>
+<p class="cu-editor-content"> </p>
+<h2 class="cu-editor-content" id="h_01JRB8DTMMYFD8X224D3YZGAJP">3.1. Request Data Export (POST)</h2>
+<div class="cu-editor-content"></div>
+<div class="cu-editor-content">This endpoint initiates the process of exporting data for a specific metric.</div>
+<div class="cu-editor-content">
+<p> </p>
+<h3 id="01JRB72NGSRPEPW3F3P1PWYM5R">Header</h3>
+<p> </p>
+<p>API endpoints expect arguments as JSON-encoded objects in the POST request body. Set the Content-Type header to application/json.</p>
+<p> </p>
+<figure class="wysiwyg-table wysiwyg-table-align-left" style="height: 66px;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 70%;"/>
+</colgroup>
+<tbody>
+<tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 201px;"><p class="ql-align-center" data-block-id="block-534604f1-6285-4480-9eb0-f27c4b62deaa"><strong>HTTP Header</strong></p></td>
+<td data-row="row-2hl4qp" style="height: 22px; width: 282px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><strong>Content</strong></p></td>
+</tr>
+<tr data-row="row-wg30gx" style="height: 22px;">
+<td data-row="row-wg30gx" style="height: 22px; width: 201px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">Content-Type</p></td>
+<td data-row="row-wg30gx" style="height: 22px; width: 282px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">application/json</p></td>
+</tr>
+<tr data-row="row-m1u2zy" style="height: 22px;">
+<td data-row="row-m1u2zy" style="height: 22px; width: 201px;"><p class="ql-align-center" data-block-id="block-c3e83dca-fc82-48e8-93c4-7ca04594b107">X-Metrio-API-Key</p></td>
+<td data-row="row-m1u2zy" style="height: 22px; width: 282px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1"><span data-block-id="block-c47b10b0-e302-4f18-b952-4d2e36214afc">&lt;<strong>your_api_key</strong>&gt;</span></p></td>
+</tr>
+</tbody>
+</table></figure><p> </p>
+<h3 id="01JRB72NGS4BF57YZDNGQ681W8">Endpoint</h3>
+<pre class="wysiwyg-code-block"><code class="language-auto">POST https://&lt;customer&gt;.metrio.net/api/metrics/data-access/public/v1/csv</code></pre>
+<p> </p>
+<ul><li data-list-item-id="e8707ff3e49f44578e082af5cd6a4e81c">Replace &lt;<strong>customer</strong>&gt; with the URL prefix of your account (e.g., "demo123" if your account URL is <a href="https://demo123.metrio.net)">https://demo123.metrio.net)</a>.</li></ul>
+<p> </p>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><h3 id="01JRB72NGSTE430VE3NNR4QNE1">Payload details</h3></div></div>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow"><div class="ql-editor">
+<pre class="wysiwyg-code-block" data-block-id="block-bb4e4e41-becc-45e5-a2b8-83656a5db51d" data-language="json"><code class="language-auto">{
+"metric_key": "metric_id",
+"filters": [{"column_key": "column_key_to_filter", "values: ["value_key_to_filter"]}],
+"sorting": [{"column_key":"column_key_to_sort", "order": "desc"}],
+"locale": "local"
+}</code></pre>
+<div class="ql-advanced-banner ql-advanced-banner-has-icon" data-advanced-banner-color="red" data-advanced-banner-icon="{"><p data-block-id="block-d3db3933-96bf-4db4-9071-bf7ef6af2d95"> </p></div>
+</div></div></div></div>
+<p data-block-id="block-d3db3933-96bf-4db4-9071-bf7ef6af2d95"> </p>
+<figure class="wysiwyg-table wysiwyg-table-align-left" style="height: 174px; width: 858px;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 27.27%;"/>
+<col style="width: 63.64%;"/>
+<col style="width: 4.55%;"/>
+<col style="width: 4.54%;"/>
+</colgroup>
+<tbody>
+<tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-534604f1-6285-4480-9eb0-f27c4b62deaa"><strong>Parameter</strong></p></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Description</strong></span></p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Mandatory</strong></span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Type</strong></span></p></td>
+</tr>
+<tr data-row="row-wg30gx" style="height: 22px;">
+<td data-row="row-wg30gx" style="height: 22px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">metric_key</p></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">This is the id of the metric for which we want to create a query.</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">filters</p></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">An array of filter objects. Each filter object specifies a column to filter on and the values to match. By default is an empty list [].</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">No</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">array</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><ul><li class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444" data-list-item-id="e35081e36d230c3614f8961b4298e33fd">column_key</li></ul></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The key of the column to filter.</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+<tr style="height: 10px;">
+<td style="height: 10px; width: 134.266px;"><ul><li class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444" data-list-item-id="e361cd434932814eb7f7f30e2bf0bdb70">values</li></ul></td>
+<td style="height: 10px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">An array of values to filter for. The column will be filtered to only include rows where the column_key matches one of the values in this array. </p></td>
+<td style="height: 10px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 10px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">array</span></p></td>
+</tr>
+<tr style="height: 10px;">
+<td style="height: 10px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">sorting</p></td>
+<td style="height: 10px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">An array of sorting objects. Each sorting object specifies a column to sort by and the sort order. Note that it allows for multi-sorting. By default is an empty list [].</p></td>
+<td style="height: 10px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">No</span></p></td>
+<td style="height: 10px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">array</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><ul><li class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444" data-list-item-id="e307beea6842f19e2fb2e151a62b5b4d6">column_key</li></ul></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The key of the column to sort by.</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><ul><li class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444" data-list-item-id="eda5231f6f404ec3bbb0271d9739033f6">order</li></ul></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The sort order. Valid values are "asc" (ascending) and "desc" (descending).</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">Yes</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 134.266px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444">locale</p></td>
+<td style="height: 22px; width: 472.766px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The locale to use for formatting the data. Defaults to "en" if not specified. Could be "fr", "es", etc depending locales available in your account.</p></td>
+<td style="height: 22px; width: 131.688px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">No</span></p></td>
+<td style="height: 22px; width: 74.2812px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11">string</span></p></td>
+</tr>
+</tbody>
+</table></figure><p data-block-id="block-d3db3933-96bf-4db4-9071-bf7ef6af2d95"> </p>
+</div>
+<div class="ql-advanced-banner ql-advanced-banner-has-icon" data-advanced-banner-color="red" data-advanced-banner-icon="{">
+<h3 id="01JRB72NGS4YM4CMN0VZWQRJX7">Response Codes</h3>
+<p> </p>
+</div>
+<div class="clickup-table-view"><figure class="wysiwyg-table wysiwyg-table-align-left" style="height: 132px; width: 821px;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 28.57%;"/>
+<col style="width: 66.67%;"/>
+<col style="width: 4.76%;"/>
+</colgroup>
+<tbody>
+<tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-534604f1-6285-4480-9eb0-f27c4b62deaa"><strong>Code</strong></p></td>
+<td data-row="row-2hl4qp" style="height: 22px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Description</strong></span></p></td>
+<td style="height: 22px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong> </strong></span></p></td>
+</tr>
+<tr data-row="row-wg30gx" style="height: 44px;">
+<td data-row="row-wg30gx" style="height: 44px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444"><strong>200</strong></p></td>
+<td data-row="row-wg30gx" style="height: 44px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span style="color: #009900;"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11"><strong>Successful Response</strong></span></span></p></td>
+<td style="height: 44px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The request was successfully submitted.</p></td>
+</tr>
+<tr data-row="row-m1u2zy" style="height: 44px;">
+<td data-row="row-m1u2zy" style="height: 44px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-c3e83dca-fc82-48e8-93c4-7ca04594b107"><strong>422</strong></p></td>
+<td data-row="row-m1u2zy" style="height: 44px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1"><span style="color: #FF9900;"><span data-block-id="block-c47b10b0-e302-4f18-b952-4d2e36214afc"><strong>Validation Error</strong></span></span></p></td>
+<td style="height: 44px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1">The request contained invalid data.</p></td>
+</tr>
+<tr data-row="row-yun4a4" style="height: 22px;">
+<td data-row="row-yun4a4" style="height: 22px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-d65922a6-ec1c-45e6-88cf-b444d2a739f2"><strong>500</strong></p></td>
+<td data-row="row-yun4a4" style="height: 22px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-tfrxgi" data-colspan="1" data-row="row-yun4a4" data-rowspan="1"><span style="color: #FF0000;"><span data-block-id="block-2837a131-c436-4881-b78d-1ef458d147d0"><strong>Internal Server Error</strong></span></span></p></td>
+<td style="height: 22px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-tfrxgi" data-colspan="1" data-row="row-yun4a4" data-rowspan="1"><span data-block-id="block-2837a131-c436-4881-b78d-1ef458d147d0">An unexpected error occurred on the server.</span></p></td>
+</tr>
+</tbody>
+</table></figure></div>
+<h2 data-block-id="block-ede86f36-14aa-4fe3-b6e1-5461e14851cb" id="01JRB72NGTCN57EPCJPRNAGMZW"> </h2>
+<p> </p>
+<h3 data-block-id="block-ede86f36-14aa-4fe3-b6e1-5461e14851cb" id="01JRB72NGTYVGB2T7VJN8B3F1D">Request Limits</h3>
+<p> </p>
+<div class="ql-block" data-block-id="block-472633fc-b455-4ed8-82a3-e52f9f4d8258">You are limited to <strong>100 submissions every 10 seconds</strong>. Exceeding this limit may result in temporary throttling.</div>
+<p> </p>
+<h3 data-block-id="block-b586c438-d142-479a-9a48-87517447c275" id="01JRB72NGT48E5P53ESXETP6N9">Parameters Definition</h3>
+<p> </p>
+<p>To use the API to export Metrics' data, a metric needs to be created. Once created, to use the API export functionality, the following parameter needs to be defined:</p>
+<ul class="ql-rendered-list-container" data-is-root="true">
+<li class="ql-rendered-bullet-list" data-block-id="block-56a88e0f-da87-45ff-84bb-7f9cfca724a3" data-list-item-id="e63306651190183c92c69d89e5c52a814">&lt;<strong>customer</strong>&gt; : The URL prefix of your account (e.g., "demo123" if your account URL is https://demo123.metrio.net).</li>
+<li class="ql-rendered-bullet-list" data-block-id="block-15f36d5f-f781-4412-9aa5-1b91ce876f11" data-list-item-id="e64d28af0d2ba3bc2bee5929b822220c9">&lt;<strong>metric_key</strong>&gt;: The Metric ID of the target Metric. You can find this value in the "General Information Section" the Metric within Nasdaq Metrio. It's labeled "Metric ID".</li>
+</ul>
+</div></div></div></div>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow">
+<div class="ql-editor">
+<div class="ql-block" data-block-id="block-f578332f-7102-4b50-9e1b-ea253425703d"></div>
+<div class="ql-block" data-block-id="block-07fbc13e-f0f6-49e3-b572-291bf60355d5"> </div>
+<div class="ql-block" data-block-id="block-cc211878-afd3-4685-9517-ec0dedba6cd6"><img class="wysiwyg-image-resized ql-img ql-img-smooth" data-id="fd414b90-c2d1-4f16-b7fd-ff74b0b34252.png" data-natural-height="722" data-natural-width="1472" src="https://t1243091.p.clickup-attachments.com/t1243091/fd414b90-c2d1-4f16-b7fd-ff74b0b34252/image.png" style="aspect-ratio: 2.03878 / 1; width: 720px;" tabindex="0"/></div>
+</div>
+<div class="ql-editor"> </div>
+<div class="ql-editor">
+<p>You can copy the key by hovering the <code><strong>Metric ID</strong></code> field.<br/> </p>
+<h2 data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" id="01JRB72NGT23ZWSA2MSJ1YEDB6"> </h2>
+<h3 id="01JRB8QZQ1R7Q92XXVPR6TTX5J">Example</h3>
+<ul><li data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" data-list-item-id="e83ae84e0f1cc786375af0a47e5b1607f" id="h_01JHTK5YRFT452SY50YGD694DP">Swagger</li></ul>
+<p>You can access and test the API using our Swagger UI:</p>
+<pre class="wysiwyg-code-block"><code class="language-auto">https://&lt;customer&gt;.metrio.netapi/metrics/data-access/public/docs#/</code></pre>
+<ul><li data-list-item-id="ee241c6afc0bb87b0a3c9451fa69a8ba8" style="list-style-type: none;"> <ul>
+<li data-list-item-id="ed025d315bcdfc4fac76a186c2fc1d8bb">Replace &lt;<strong>customer</strong>&gt; with your account's URL prefix.</li>
+<li data-list-item-id="e0ffae1afb6f5b8102bea4d8bfb2f9367">
+<strong>You must be logged in</strong> to your Nasdaq Metrio account to access the Swagger UI.</li>
+</ul>
+</li></ul>
+<p> </p>
+<p><img alt="Screenshot 2025-04-08 at 1.55.07 PM.png" src="32985480949531-Exporting-Data-Using-Nasdaq-Metrio-REST-API_images/35788322757019"/></p>
+<ul><li data-list-item-id="e1d4a6d26aa280b6dfd998b52982a0b23">Curl</li></ul>
+<pre class="wysiwyg-code-block"><code class="language-auto">INPUT:
+
+curl -X 'POST' \                                                     
+  'https://{client}.metrio.net/api/metrics/data-access/public/v1/csv' \
+  -H 'X-Page: 1' \
+  -H 'X-Per-Page: 10' \
+  -H 'X-Metrio-API-Key: APIKeyValue' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "metric_key": "packages_ghgtool_metric_consumption_global_monthly",
+  "filters": [{"column_key": "tag_facility_id", "values: ["facility_0007"]}],
+  "sorting": [{"column_key":"date", "order": "desc"}],
+  "locale": "en"
+}'
+</code></pre>
+<div class="ql-block" data-block-id="block-882796e0-f4f7-49ef-8ce9-f131a629dba1"> </div>
+<pre class="wysiwyg-code-block"><code class="language-auto">OUTPUT:
+{
+"filename": "packages_ghgtool_metric_consumption_global_monthly_20250408174053",
+"success": true,
+"num_rows": 10,
+"execution_time": 1.37746262550354
+}
+</code></pre>
+<p class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc"> </p>
+<p class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc">Now we will be able to get the file generated.</p>
+<p class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc"> </p>
+<p class="undefined"> </p>
+<h2 class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" id="h_01JRB8FCP7EFEGGBR900DM9BEV">3.2. Get Data File (GET)</h2>
+<p class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" id="h_01JRBDBF2B2BEFT5BJQJ86YA6C"> </p>
+<p class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" id="h_01JRBDBF2BCF84ZN6EG8QFMMBK">This endpoint retrieves the CSV file that was generated by the previous POST request.</p>
+<p class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" id="h_01JRBDBF2B4B4MJKBH4P4H5250"> </p>
+<div class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc">
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow"><div class="ql-editor">
+<div class="cu-editor-content">
+<h3 id="01JRB8SE4GWTRPG3GNNGHM20XX">Header</h3>
+<p> </p>
+<p>API endpoints expect arguments as JSON-encoded objects in the POST request body. Set the Content-Type header to application/json.</p>
+<p> </p>
+<figure class="wysiwyg-table wysiwyg-table-align-left" style="height: 66px;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 30%;"/>
+<col style="width: 70%;"/>
+</colgroup>
+<tbody>
+<tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 201px;"><p class="ql-align-center" data-block-id="block-534604f1-6285-4480-9eb0-f27c4b62deaa"><strong>HTTP Header</strong></p></td>
+<td data-row="row-2hl4qp" style="height: 22px; width: 282px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><strong>Content</strong></p></td>
+</tr>
+<tr data-row="row-m1u2zy" style="height: 22px;">
+<td data-row="row-m1u2zy" style="height: 22px; width: 201px;"><p class="ql-align-center" data-block-id="block-c3e83dca-fc82-48e8-93c4-7ca04594b107">X-Metrio-API-Key</p></td>
+<td data-row="row-m1u2zy" style="height: 22px; width: 282px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1"><span data-block-id="block-c47b10b0-e302-4f18-b952-4d2e36214afc">&lt;<strong>your_api_key</strong>&gt;</span></p></td>
+</tr>
+</tbody>
+</table></figure><p> </p>
+<h3 id="01JRB8SE4GTSXDKNJK8CS3N6HW">Endpoint</h3>
+<pre class="wysiwyg-code-block"><code class="language-auto">GET https://&lt;customer&gt;.metrio.net/api/metrics/data-access/public/v1/csv?&lt;filename&gt;</code></pre>
+<p> </p>
+<ul>
+<li data-list-item-id="e42bfc9e7656db5b5a16f889dacff75b8">Replace &lt;<strong>customer</strong>&gt; with the URL prefix of your account (e.g., "demo123" if your account URL is <a href="https://demo123.metrio.net)">https://demo123.metrio.net)</a>.</li>
+<li data-list-item-id="eec96af1bbbe01c7d976e7efe69da3146">Replace &lt;<strong>filename</strong>&gt; with the value obtained from the response of the POST request.</li>
+</ul>
+<p data-block-id="block-d3db3933-96bf-4db4-9071-bf7ef6af2d95"> </p>
+</div>
+<div class="ql-advanced-banner ql-advanced-banner-has-icon" data-advanced-banner-color="red" data-advanced-banner-icon="{">
+<h3 id="01JRB8SE4HZE0TRZSM7XGG18BZ">Response Codes</h3>
+<p> </p>
+</div>
+<div class="clickup-table-view"><figure class="wysiwyg-table wysiwyg-table-align-left" style="height: 132px; width: 821px;"><table class="wysiwyg-table-resized">
+<colgroup>
+<col style="width: 28.57%;"/>
+<col style="width: 66.67%;"/>
+<col style="width: 4.76%;"/>
+</colgroup>
+<tbody>
+<tr data-row="row-2hl4qp" style="height: 22px;">
+<td data-row="row-2hl4qp" style="height: 22px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-534604f1-6285-4480-9eb0-f27c4b62deaa"><strong>Code</strong></p></td>
+<td data-row="row-2hl4qp" style="height: 22px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong>Description</strong></span></p></td>
+<td style="height: 22px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-6oxiqj" data-colspan="1" data-row="row-2hl4qp" data-rowspan="1"><span data-block-id="block-643ebdec-f767-4df2-85b2-47e3ae931f8c"><strong> </strong></span></p></td>
+</tr>
+<tr data-row="row-wg30gx" style="height: 44px;">
+<td data-row="row-wg30gx" style="height: 44px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-647b1598-3f2e-46eb-b123-587b1a994444"><strong>200</strong></p></td>
+<td data-row="row-wg30gx" style="height: 44px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1"><span style="color: #009900;"><span data-block-id="block-fc3e620b-454f-4b5a-8a45-eb4a210b2a11"><strong>Successful Response</strong></span></span></p></td>
+<td style="height: 44px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-nqmjf2" data-colspan="1" data-row="row-wg30gx" data-rowspan="1">The request was successfully submitted.</p></td>
+</tr>
+<tr data-row="row-m1u2zy" style="height: 44px;">
+<td data-row="row-m1u2zy" style="height: 44px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-c3e83dca-fc82-48e8-93c4-7ca04594b107"><strong>422</strong></p></td>
+<td data-row="row-m1u2zy" style="height: 44px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1"><span style="color: #FF9900;"><span data-block-id="block-c47b10b0-e302-4f18-b952-4d2e36214afc"><strong>Validation Error</strong></span></span></p></td>
+<td style="height: 44px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-d338sz" data-colspan="1" data-row="row-m1u2zy" data-rowspan="1">The request contained invalid data.</p></td>
+</tr>
+<tr data-row="row-yun4a4" style="height: 22px;">
+<td data-row="row-yun4a4" style="height: 22px; width: 105.172px;"><p class="ql-align-center" data-block-id="block-d65922a6-ec1c-45e6-88cf-b444d2a739f2"><strong>500</strong></p></td>
+<td data-row="row-yun4a4" style="height: 22px; width: 243.297px;"><p class="qlbt-cell-line" data-cell="cell-tfrxgi" data-colspan="1" data-row="row-yun4a4" data-rowspan="1"><span style="color: #FF0000;"><span data-block-id="block-2837a131-c436-4881-b78d-1ef458d147d0"><strong>Internal Server Error</strong></span></span></p></td>
+<td style="height: 22px; width: 438.531px;"><p class="qlbt-cell-line" data-cell="cell-tfrxgi" data-colspan="1" data-row="row-yun4a4" data-rowspan="1"><span data-block-id="block-2837a131-c436-4881-b78d-1ef458d147d0">An unexpected error occurred on the server.</span></p></td>
+</tr>
+</tbody>
+</table></figure></div>
+<h2 data-block-id="block-ede86f36-14aa-4fe3-b6e1-5461e14851cb" id="01JRB8SE4HFYW5HMF9T938FHH7"> </h2>
+<p> </p>
+<h3 data-block-id="block-ede86f36-14aa-4fe3-b6e1-5461e14851cb" id="01JRB8SE4H9JE753MF1W2QB9CC">Request Limits</h3>
+<p> </p>
+<div class="ql-block" data-block-id="block-472633fc-b455-4ed8-82a3-e52f9f4d8258">You are limited to <strong>100 submissions every 10 seconds</strong>. Exceeding this limit may result in temporary throttling.</div>
+<p> </p>
+<p> </p>
+</div></div></div></div>
+<div class="cu-editor-wrapper doc-editor"><div class="cu-editor-content"><div class="cu-editor ql-container ql-snow"><div class="ql-editor">
+<h3 id="01JRB8SE4JCJ4A998RKGTJTKDX">Example</h3>
+<ul><li data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" data-list-item-id="e92c612230ce1078b8d3821abfd4328b5" id="h_01JHTK5YRFT452SY50YGD694DP">Swagger</li></ul>
+<p>You can access and test the API using our Swagger UI:</p>
+<pre class="wysiwyg-code-block"><code class="language-auto">https://&lt;customer&gt;.metrio.netapi/metrics/data-access/public/docs#/</code></pre>
+<ul><li data-list-item-id="ef6ee23843e59621f55114a0fa13dfe3c" style="list-style-type: none;"> <ul>
+<li data-list-item-id="e2e73f840893787fac2f786c5019f3010">Replace &lt;<strong>customer</strong>&gt; with your account's URL prefix.</li>
+<li data-list-item-id="eb4a39196186dbad6bccc099c7dcd77e1">
+<strong>You must be logged in</strong> to your Nasdaq Metrio account to access the Swagger UI.</li>
+</ul>
+</li></ul>
+<p> </p>
+<p><img alt="Screenshot 2025-04-08 at 1.55.07 PM.png" src="32985480949531-Exporting-Data-Using-Nasdaq-Metrio-REST-API_images/35788322757019"/></p>
+<ul><li data-list-item-id="e2c43eebe42364e977d57a5f204c18a72">Curl</li></ul>
+<pre class="wysiwyg-code-block"><code class="language-auto">INPUT:
+
+curl -X 'GET' \
+'https://products.metrio.net/api/metrics/data-access/public/v1/csv?filename=packages_ghgtool_metric_consumption_global_monthly_20250408174053' \
+-H 'accept: */*'
+</code></pre>
+<p class="ql-block" data-block-id="block-882796e0-f4f7-49ef-8ce9-f131a629dba1"> </p>
+<p class="undefined"> </p>
+</div></div></div></div>
+</div>
+<h2 class="ql-block" data-block-id="block-5cc9017e-407f-40b5-b027-fdceff8415dc" id="h_01JRB8JBKKVA3ATX9R6CYTXDSY">3.3. Example usage</h2>
+<ul><li data-list-item-id="e89a0f63fe2c86b64bde4cc74cc5f07b1">Python</li></ul>
+<pre class="wysiwyg-code-block"><code class="language-auto">import json
+import logging
+import requests
+from termcolor import colored
+import time
+
+customer = "_YOUR_CLIENT_URL_PREFIX_"  # client URL prefix, ex: demo
+your_api_key = "_YOUR_API_KEY_"  # Paste a valid Metrio API
+metric_keys_to_get = [
+    "_METRIC_ID_1",
+    "_METRIC_ID_2"
+]
+
+api_endpoint_upload_csv = f"https://{customer}.metrio.net/api/metrics/data-access/public/v1/csv"
+api_endpoint_get_csv = f"https://{customer}.metrio.net/api/metrics/data-access/public/v1/csv"
+
+# Configure the headers
+headers = {
+    'Content-Type': 'application/json',
+    "X-Metrio-API-Key": your_api_key
+}
+filters = []
+sorting = []
+locale = "en"
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+
+# List to track failed metrics
+failed_metrics = []
+
+def send_post_request(metric_key):
+    # Prepare the payload for the POST request
+    payload = {
+        "metric_key": metric_key,
+        "filters": filters,
+        "sorting": sorting,
+        "locale": locale
+    }
+
+    # Send the POST request
+    response = requests.post(api_endpoint_upload_csv, headers=headers, data=json.dumps(payload))
+
+    if response.status_code == 200:
+        response_data = response.json()
+        filename_for_csv = response_data.get("filename")
+        if filename_for_csv:
+            print(f"POST request successful for metric '{metric_key}'. Filename: {filename_for_csv}")
+            return filename_for_csv
+        else:
+            error_message = f"POST request successful but no filename returned for metric '{metric_key}'."
+            print(colored(error_message, "red"))
+            failed_metrics.append(metric_key)
+    else:
+        error_message = f"Failed to query the API for metric '{metric_key}'. Status code: {response.status_code}"
+        print(colored(error_message, "red"))
+        print(colored(f"Response: {response.text}", "red"))
+        failed_metrics.append(metric_key)
+    return None
+
+def download_the_csv(filename_for_csv, metric_key):
+    # Construct the URL to download the CSV
+    get_csv_url = f"{api_endpoint_get_csv}?filename={filename_for_csv}"
+
+    # Send a GET request to download the CSV file
+    get_csv = requests.get(get_csv_url, headers=headers)
+
+    if get_csv.status_code == 200:
+        # Extract the filename from the Content-Disposition header
+        content_disposition = get_csv.headers.get("content-disposition", "")
+        if "filename=" in content_disposition:
+            actual_filename = content_disposition.split("filename=")[-1].strip().strip('"')
+        else:
+            actual_filename = filename_for_csv
+
+        # Save the CSV file locally
+        with open(actual_filename, 'wb') as file:
+            file.write(get_csv.content)
+        print(f"CSV file '{actual_filename}' downloaded successfully.")
+    else:
+        error_message = f"Failed to download the CSV for metric '{metric_key}'. Status code: {get_csv.status_code}"
+        print(colored(error_message, "red"))
+        print(colored(f"Response: {get_csv.text}", "red"))
+        failed_metrics.append(metric_key)
+
+def process_metric(metric_key):
+    filename = send_post_request(metric_key)
+    if filename:
+        download_the_csv(filename, metric_key)
+
+# Track total execution time
+total_start_time = time.time()
+
+# Process each metric sequentially
+for metric_key in metric_keys_to_get:
+    process_metric(metric_key)
+
+# Summarize failed metrics at the end
+if failed_metrics:
+    # Remove duplicates by converting the list to a set
+    unique_failed_metrics = set(failed_metrics)
+    print(colored("\nThe following metrics failed to process:", "red"))
+    for metric in unique_failed_metrics:
+        # Create a clickable link for each failed metric
+        metric_url = f"https://{customer}.metrio.net/metrics/{metric}"
+        print(colored(f"- {metric_url}", "red"))
+else:
+    print("All metrics processed successfully.")
+
+# Log total execution time
+total_end_time = time.time()
+total_execution_time = total_end_time - total_start_time
+print(f"Total execution time: {total_execution_time:.2f} seconds.")
+
+                    
+                  </code></pre>
+</div>
+</div></div></div>
+</div>
+</div>
+</div></div></div>
+</div>
+<prev-next-articles class="prevnext lt-border-bottom lt-border-top lt-py-5" next-text="Next article" prev-text="Previous article"></prev-next-articles>
+</article></div></body></html>
+    
