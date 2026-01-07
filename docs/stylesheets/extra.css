@@ -46,13 +46,33 @@ html {
    Enhanced Code Block Styling
    ======================================== */
 
-/* Code block container */
+/* Code block container - Full width */
 .highlight {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   margin: 1.5em 0;
   position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Make article content wider for code blocks */
+.md-content__inner {
+  max-width: 100%;
+}
+
+.md-typeset .highlight {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 0;
+}
+
+@media (min-width: 76.25em) {
+  .md-typeset .highlight {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
 }
 
 /* Code block with title */
@@ -125,13 +145,12 @@ pre code {
   fill: white;
 }
 
-/* Code block language badge */
+/* Code block language badges - Colored by language */
 .highlight::before {
   content: attr(data-lang);
   position: absolute;
   top: 0.5em;
   left: 1em;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 0.3em 0.8em;
   border-radius: 6px;
@@ -140,6 +159,95 @@ pre code {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Language-specific colors */
+[class*="language-python"]::before,
+.highlight.python::before { 
+  background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%);
+}
+
+[class*="language-javascript"]::before,
+[class*="language-js"]::before,
+.highlight.javascript::before { 
+  background: linear-gradient(135deg, #f7df1e 0%, #f0db4f 100%);
+  color: #323330;
+}
+
+[class*="language-json"]::before,
+.highlight.json::before { 
+  background: linear-gradient(135deg, #292929 0%, #5a5a5a 100%);
+}
+
+[class*="language-bash"]::before,
+[class*="language-shell"]::before,
+[class*="language-sh"]::before,
+.highlight.bash::before { 
+  background: linear-gradient(135deg, #4EAA25 0%, #89e051 100%);
+}
+
+[class*="language-yaml"]::before,
+[class*="language-yml"]::before,
+.highlight.yaml::before { 
+  background: linear-gradient(135deg, #cb171e 0%, #ff4444 100%);
+}
+
+[class*="language-typescript"]::before,
+[class*="language-ts"]::before,
+.highlight.typescript::before { 
+  background: linear-gradient(135deg, #3178c6 0%, #5599ff 100%);
+}
+
+[class*="language-html"]::before,
+.highlight.html::before { 
+  background: linear-gradient(135deg, #e34c26 0%, #ff6b3d 100%);
+}
+
+[class*="language-css"]::before,
+.highlight.css::before { 
+  background: linear-gradient(135deg, #264de4 0%, #4c7ef1 100%);
+}
+
+[class*="language-sql"]::before,
+.highlight.sql::before { 
+  background: linear-gradient(135deg, #00758f 0%, #00a8cc 100%);
+}
+
+[class*="language-go"]::before,
+.highlight.go::before { 
+  background: linear-gradient(135deg, #00ADD8 0%, #5dc9e2 100%);
+}
+
+[class*="language-java"]::before,
+.highlight.java::before { 
+  background: linear-gradient(135deg, #b07219 0%, #ff9800 100%);
+}
+
+[class*="language-ruby"]::before,
+.highlight.ruby::before { 
+  background: linear-gradient(135deg, #701516 0%, #cc342d 100%);
+}
+
+[class*="language-php"]::before,
+.highlight.php::before { 
+  background: linear-gradient(135deg, #777bb3 0%, #9999cc 100%);
+}
+
+[class*="language-docker"]::before,
+[class*="language-dockerfile"]::before,
+.highlight.docker::before { 
+  background: linear-gradient(135deg, #0db7ed 0%, #49d0f7 100%);
+}
+
+[class*="language-rust"]::before,
+.highlight.rust::before { 
+  background: linear-gradient(135deg, #ce422b 0%, #ff6f3c 100%);
+}
+
+/* Default gradient for unknown languages */
+.highlight::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 /* Syntax highlighting improvements */
