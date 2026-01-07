@@ -54,6 +54,7 @@ theme:
     - search.highlight
     - search.share
     - content.code.copy
+    - content.code.select
     - content.code.annotate
     - content.tabs.link
   icon:
