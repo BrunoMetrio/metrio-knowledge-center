@@ -1,51 +1,120 @@
-# Welcome to the Help Center
+---
+hide:
+  - navigation
+  - toc
+---
 
-<div style="background: linear-gradient(90deg, #1e293b 0%, #0092bc 100%); color: #fff; border-radius: 16px; padding: 2.5em 2em; margin-bottom: 2em; text-align: center;">
-  <img src="../images/logo.svg" alt="Lotus One logo" style="height: 48px; margin-bottom: 1em;" />
-  <h1 style="font-size: 2.5em; font-weight: 800; margin-bottom: 0.5em;">How can we help?</h1>
-  <p style="font-size: 1.3em; margin-bottom: 1.5em;">Find answers, browse topics, or get in touch with our team.</p>
-  <div style="max-width: 400px; margin: 0 auto 1em auto; display: flex;">
-    <input type="text" placeholder="Search..." style="flex: 1; padding: 0.8em 1.2em; border-radius: 25px 0 0 25px; border: none; font-size: 1.1em; color: #23272f;" />
-    <button style="background: #0092bc; color: #fff; border: none; border-radius: 0 25px 25px 0; padding: 0.8em 1.5em; font-weight: 600; font-size: 1.1em;">Search</button>
+<div style="text-align: center; padding: 3em 1em; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; margin: -2em -2em 3em -2em; color: white;">
+  <h1 style="font-size: 3.5em; font-weight: 900; margin-bottom: 0.3em; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">:wave: Welcome to Metrio</h1>
+  <p style="font-size: 1.4em; margin-bottom: 2em; opacity: 0.95;">Your comprehensive knowledge center for sustainability management</p>
+  
+  <div style="background: white; border-radius: 50px; padding: 0.8em 1.5em; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 1em;">
+    <svg style="width: 24px; height: 24px; fill: #667eea;" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/></svg>
+    <input type="search" placeholder="Search documentation..." style="flex: 1; border: none; outline: none; font-size: 1.1em; color: #333; background: transparent;" id="search-input" />
+    <kbd style="background: #f3f4f6; color: #666; padding: 0.3em 0.6em; border-radius: 5px; font-size: 0.85em; border: 1px solid #d1d5db;">/</kbd>
   </div>
-  <div style="margin-top: 1em; font-size: 0.95em;">
-    <span style="color: #cbd5e1;">Popular searches:</span>
-    <span style="background: #334155; color: #fff; border-radius: 999px; padding: 0.3em 1em; margin: 0 0.3em; font-weight: 600;">installation</span>
-    <span style="background: #334155; color: #fff; border-radius: 999px; padding: 0.3em 1em; margin: 0 0.3em; font-weight: 600;">branding</span>
-    <span style="background: #334155; color: #fff; border-radius: 999px; padding: 0.3em 1em; margin: 0 0.3em; font-weight: 600;">customization</span>
-  </div>
+  
+  <p style="margin-top: 1.5em; font-size: 0.95em; opacity: 0.8;">💡 Press <strong>/</strong> to search • Browse categories below</p>
+</div>
+
+<script>
+  // Focus search on keyboard shortcut
+  document.addEventListener('keydown', function(e) {
+    if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
+      e.preventDefault();
+      document.querySelector('.md-search__input').focus();
+    }
+  });
+  
+  // Link custom input to Material search
+  document.addEventListener('DOMContentLoaded', function() {
+    const customInput = document.getElementById('search-input');
+    const materialInput = document.querySelector('.md-search__input');
+    if (customInput && materialInput) {
+      customInput.addEventListener('focus', () => materialInput.focus());
+      customInput.addEventListener('input', (e) => {
+        materialInput.value = e.target.value;
+        materialInput.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    }
+  });
+</script>
+
+## :books: Browse Documentation
+
+<div class="grid cards" markdown>
+
+-   :rocket: __Getting Started__
+
+    ---
+
+    Learn the basics of Metrio and get your workspace set up
+
+    [:octicons-arrow-right-24: Introduction to Metrio](Getting Started/34416209192475-Introduction-to-Metrio.md)
+    
+    [:octicons-arrow-right-24: User Management](Getting Started/36977854040219-User-Management.md)
+
+-   :seedling: __Carbon Accounting__
+
+    ---
+
+    Track and manage your carbon emissions across all scopes
+
+    [:octicons-arrow-right-24: Introduction to CAM](Carbon Accounting & Management/31940281264795-Introduction-to-CAM-Tool.md)
+    
+    [:octicons-arrow-right-24: Scope 1, 2 & 3](Carbon Accounting & Management/31940571128731-Scope-1.md)
+
+-   :material-database: __Collect Data__
+
+    ---
+
+    Manage data sources and complete sustainability tasks
+
+    [:octicons-arrow-right-24: Data Sources Guide](Collect Data/37826075519003-Introduction-to-Data-Sources-and-List-Manager.md)
+    
+    [:octicons-arrow-right-24: Complete Tasks](Collect Data/34416048301211-Complete-Tasks.md)
+
+-   :chart_with_upwards_trend: __Measure Impact__
+
+    ---
+
+    Define and track your sustainability metrics
+
+    [:octicons-arrow-right-24: Navigating Metrics](Measure Your Impact/29498074625435-Navigating-the-List-of-Metrics.md)
+    
+    [:octicons-arrow-right-24: Simple Metrics](Measure Your Impact/29498125748507-Simple-Metrics.md)
+
+-   :material-file-document: __Report & Communicate__
+
+    ---
+
+    Create and share professional sustainability reports
+
+    [:octicons-arrow-right-24: Publisher Guide](Report & Communicate/34947326402075-Introduction-to-Publisher.md)
+    
+    [:octicons-arrow-right-24: Create Reports](Report & Communicate/29100299556635-Create-a-Report-in-Publisher.md)
+
+-   :material-lightbulb: __Disclose Results__
+
+    ---
+
+    Share your sustainability achievements and compliance
+
+    [:octicons-arrow-right-24: Quick Start](Disclose Your Results/29099128214811-Quick-Start-Guide-for-Administrators.md)
+    
+    [:octicons-arrow-right-24: FAQs](Disclose Your Results/29161248731419-FAQs.md)
+
 </div>
 
 ---
 
-## Browse our knowledge base
+## :sparkles: Latest Updates
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2em; margin: 2em 0;">
-  <div style="background: #fff; border-radius: 12px; padding: 2em 1.5em; box-shadow: 0 2px 8px rgba(30,41,59,0.08); display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.2s;">
-    <span class="material-icons" style="color: #ef4444; font-size: 2.5em; margin-bottom: 0.5em;">menu_book</span>
-    <h3 style="margin: 0 0 0.5em 0; font-size: 1.2em; font-weight: 700; color: #1e293b;">Getting Started</h3>
-    <p style="font-size: 1em; color: #64748b; margin-bottom: 1em; text-align: center;">Questions about Lotus Themes products and services</p>
-    <a href="Getting%20Started/34416209192475-Introduction-to-Metrio/" style="color: #0092bc; font-weight: 600; text-decoration: underline;">Read more →</a>
-  </div>
-  <div style="background: #fff; border-radius: 12px; padding: 2em 1.5em; box-shadow: 0 2px 8px rgba(30,41,59,0.08); display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.2s;">
-    <span class="material-icons" style="color: #22c55e; font-size: 2.5em; margin-bottom: 0.5em;">warning</span>
-    <h3 style="margin: 0 0 0.5em 0; font-size: 1.2em; font-weight: 700; color: #1e293b;">Troubleshooting</h3>
-    <p style="font-size: 1em; color: #64748b; margin-bottom: 1em; text-align: center;">Guidelines in case something goes wrong</p>
-    <a href="#" style="color: #0092bc; font-weight: 600; text-decoration: underline;">Read more →</a>
-  </div>
-  <div style="background: #fff; border-radius: 12px; padding: 2em 1.5em; box-shadow: 0 2px 8px rgba(30,41,59,0.08); display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.2s;">
-    <span class="material-icons" style="color: #f59e42; font-size: 2.5em; margin-bottom: 0.5em;">shopping_cart</span>
-    <h3 style="margin: 0 0 0.5em 0; font-size: 1.2em; font-weight: 700; color: #1e293b;">Purchasing Questions</h3>
-    <p style="font-size: 1em; color: #64748b; margin-bottom: 1em; text-align: center;">All you need to know about shopping at Lotus Themes</p>
-    <a href="#" style="color: #0092bc; font-weight: 600; text-decoration: underline;">Read more →</a>
-  </div>
-  <div style="background: #fff; border-radius: 12px; padding: 2em 1.5em; box-shadow: 0 2px 8px rgba(30,41,59,0.08); display: flex; flex-direction: column; align-items: center; transition: box-shadow 0.2s;">
-    <span class="material-icons" style="color: #3b82f6; font-size: 2.5em; margin-bottom: 0.5em;">settings</span>
-    <h3 style="margin: 0 0 0.5em 0; font-size: 1.2em; font-weight: 700; color: #1e293b;">Usage Guides</h3>
-    <p style="font-size: 1em; color: #64748b; margin-bottom: 1em; text-align: center;">Instructions related to themes installation and usage</p>
-    <a href="#" style="color: #0092bc; font-weight: 600; text-decoration: underline;">Read more →</a>
-  </div>
-</div>
+!!! tip "2025 Roadmap Available"
+    Check out our [2025 Roadmap](Release Notes/33699448650523-2025-Roadmap.md) to see what's coming next!
+
+!!! info "Recent Release"
+    View the [latest release notes](Release Notes/31272098764315--23-11-24-4-7-Release-Notes.md) for new features and improvements.
 
 ---
 

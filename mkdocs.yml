@@ -1,6 +1,6 @@
-site_name: Zendesk Knowledge Base
-site_url: http://localhost:8000
-repo_url: ''
+site_name: Metrio Knowledge Center
+site_url: https://brunometrio.github.io/metrio-knowledge-center/
+repo_url: https://github.com/BrunoMetrio/metrio-knowledge-center
 nav:
   - Getting Started:
       - Introduction to Metrio: 'Getting Started/34416209192475-Introduction-to-Metrio.md'
@@ -47,16 +47,42 @@ theme:
     - navigation.tabs
     - navigation.sections
     - navigation.expand
+    - navigation.top
+    - navigation.tracking
     - search.suggest
     - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
 extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/just-the-docs/just-the-docs
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-\.]'
+
 markdown_extensions:
   - admonition
-  - codehilite
-  - footnotes
-  - meta
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true

@@ -1,0 +1,65 @@
+/* Modern Material Design enhancements */
+
+/* Card hover effects */
+.grid.cards > :hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+  transition: all 0.3s ease;
+}
+
+/* Enhanced search bar */
+.md-search__input {
+  border-radius: 50px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.md-search__input:focus {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Card grid styling */
+.grid.cards {
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.grid.cards > * {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Admonition styling */
+.admonition {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Code block improvements */
+.highlight {
+  border-radius: 8px;
+}
+
+/* Navigation improvements */
+.md-tabs {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Footer styling */
+.md-footer {
+  margin-top: 3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grid.cards {
+    grid-template-columns: 1fr;
+  }
+}
